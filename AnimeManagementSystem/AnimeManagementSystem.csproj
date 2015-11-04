@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\PageController.cs" />
+    <Compile Include="Model\AnimeModel.cs" />
     <Compile Include="View\UserControls\AnimeItem.cs" />
     <Compile Include="View\AnimeManagementSystemForm.cs">
       <SubType>Form</SubType>

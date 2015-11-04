@@ -34,7 +34,7 @@ namespace AnimeManagementSystem.View.UserControls
             // AnimeListBox
             // 
             this.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.Size = new System.Drawing.Size(120, 88);
+            this.Size = new System.Drawing.Size(327, 88);
             this.ResumeLayout(false);
 
         }

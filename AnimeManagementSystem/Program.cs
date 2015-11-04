@@ -1,4 +1,5 @@
-﻿using AnimeManagementSystem.View;
+﻿using AnimeManagementSystem.Model;
+using AnimeManagementSystem.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,10 @@ namespace AnimeManagementSystem
         [STAThread]
         static void Main()
         {
+            AnimeModel model = new AnimeModel();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AnimeManagementSystemForm());
+            Application.Run(new AnimeManagementSystemForm(model));
         }
     }
 }

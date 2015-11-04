@@ -12,22 +12,22 @@ namespace AnimeManagementSystem.View.UserControls
 {
     public partial class AnimeListBox : ListBox
     {
+        private const int ITEM_HEIGHT = 100;
+
         public AnimeListBox()
         {
             InitializeComponent();
+            ItemHeight = ITEM_HEIGHT + Margin.Vertical;
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
         }
 
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
-            
-            if (/*Items[e.Index] is AnimeItem*/true)
+            if (Items[e.Index] is AnimeItem)
             {
-                // AnimeItem animeItem = Items[e.Index] as AnimeItem;
-                SolidBrush solidBrush = new SolidBrush(Color.Green);
-                e.Graphics.FillRectangle(solidBrush, e.Bounds);
-                solidBrush.Dispose();
-                TextRenderer.DrawText(e.Graphics, Items[e.Index].ToString(), e.Font, e.Bounds, e.ForeColor);
+                AnimeItem animeItem = Items[e.Index] as AnimeItem;
+                e.DrawBackground();
+                animeItem.Draw(e.Graphics, e.Bounds, Margin);
             }
             base.OnDrawItem(e);
         }
@@ -37,11 +37,14 @@ namespace AnimeManagementSystem.View.UserControls
             for (int i = 0; i < Items.Count; i++)
             {
                 Rectangle itemRect = GetItemRectangle(i);
-                DrawItemEventArgs diea = new DrawItemEventArgs(e.Graphics, this.Font, itemRect, i, DrawItemState.None);
-                OnDrawItem(diea);
+                if (e.ClipRectangle.IntersectsWith(itemRect))
+                {
+                    DrawItemState drawItemState = SelectedIndices.Contains(i) ? DrawItemState.Selected : DrawItemState.None;
+                    DrawItemEventArgs drawItemEventArgs = new DrawItemEventArgs(e.Graphics, this.Font, itemRect, i, drawItemState);
+                    OnDrawItem(drawItemEventArgs);
+                }
             }
             base.OnPaint(e);
         }
-
     }
 }
