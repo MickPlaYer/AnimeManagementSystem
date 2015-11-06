@@ -23,6 +23,8 @@ namespace AnimeManagementSystem.View.UserControls
 
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
+            if (e.Index < 0)
+                return;
             if (Items[e.Index] is AnimeItem)
             {
                 AnimeItem animeItem = Items[e.Index] as AnimeItem;

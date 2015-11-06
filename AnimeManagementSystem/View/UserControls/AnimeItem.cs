@@ -13,7 +13,7 @@ namespace AnimeManagementSystem.View.UserControls
         private Image _banner;
         private Size _imageSize = new Size(300, 100);
 
-        public AnimeItem(string bannerPath = "./Banners/Banner.png")
+        public AnimeItem(String bannerPath = "./Banners/Banner.png")
         {
             _banner = Image.FromFile(bannerPath);
         }
@@ -24,6 +24,11 @@ namespace AnimeManagementSystem.View.UserControls
             location.Y += margin.Vertical / 2;
             location.X += margin.Horizontal / 2;
             graphics.DrawImage(_banner, new Rectangle(location, _imageSize));
+        }
+
+        public Image Banner
+        { 
+            get { return _banner; }
         }
     }
 }

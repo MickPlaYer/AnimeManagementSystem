@@ -16,20 +16,34 @@ namespace AnimeManagementSystem.View
     public partial class AnimeManagementSystemForm : Form
     {
         private AnimeModel _model;
-        private PageController _newPageController;
+        private PageController _pageController;
 
         public AnimeManagementSystemForm(AnimeModel model)
         {
             InitializeComponent();
-            _newPageController = new PageController(_tabControl);
+            _pageController = new PageController(model, _tabControl);
             _model = model;
-            _newPageAnimeListBox.Items.Add(new AnimeItem("./Banners/201510/one_punch_man.png"));
-            _newPageAnimeListBox.Items.Add(new AnimeItem());
         }
 
         private void OnClickItemPageNew(object sender, EventArgs e)
         {
-            _newPageController.ChangeEnable(sender);
+            _pageController.ChangeEnable(sender as ToolStripMenuItem);
+        }
+
+        private void OnPageChanged(object sender, EventArgs e)
+        {
+            _pageController.ChangePage();
+        }
+
+        private void OnAddAnime(object sender, EventArgs e)
+        {
+            _model.AddNewAnime(2015, Quarter.Fourth, "ワンパンマン", "One Punch Man!", "./Banners/201510/one_punch_man.png", (int)_pageController.CurrentPage);
+            _pageController.UpdateListBox(_pageController.GetCurrentListBox());
+        }
+
+        private void OnSelectedItemChanged(object sender, EventArgs e)
+        {
+            _pageController.UpdateContentView(sender as AnimeListBox, _pageController.GetCurrentContentBox());
         }
     }
 }
